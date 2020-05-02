@@ -1,12 +1,12 @@
 const styles = () => ({
     box: {
-        display: "flex",
+        display: 'flex',
     },
     shape: {
         padding: 20,
         margin: 10,
-        backgroundColor: "blue"
+        backgroundColor: 'blue'
     }
-})
+});
 
 export default styles;

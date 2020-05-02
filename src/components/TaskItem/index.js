@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -42,3 +43,9 @@ const TaskItem = props => {
 };
 
 export default withStyles(styles)(TaskItem);
+
+TaskItem.propTypes = {
+  task: PropTypes.object,
+  status: PropTypes.object,
+  classes: PropTypes.object
+};

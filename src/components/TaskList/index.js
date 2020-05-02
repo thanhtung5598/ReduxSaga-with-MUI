@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import styles from './styles';
@@ -14,10 +15,16 @@ const TaskList = props => {
           </Box>
           <div className={classes.wrapperListTask}>
             {tasks.map(task => {
-              return <TaskItem key={task.id} task={task} status={status} />
+              return <TaskItem key={task.id} task={task} status={status} />;
             })}
           </div>
         </Grid>
-      )
-}
-export default withStyles(styles)(TaskList);;
+      );
+};
+export default withStyles(styles)(TaskList);
+
+TaskList.propTypes = {
+  tasks: PropTypes.object,
+  status: PropTypes.object,
+  classes: PropTypes.object
+};

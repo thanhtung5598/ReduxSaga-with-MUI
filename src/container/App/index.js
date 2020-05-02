@@ -6,10 +6,10 @@ import { withStyles, ThemeProvider } from '@material-ui/core';
 
 const App = () => {
   return (
-    <ThemeProvider theme={theme} >
+    <ThemeProvider theme={theme}>
       <TaskBoard />
     </ThemeProvider>
   );
-}
+};
 
 export default withStyles(styles)(App);
