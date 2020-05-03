@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PropTypes  from 'prop-types';
+import PropTypes from 'prop-types';
 import styles from './styles';
 import { withStyles } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
@@ -55,13 +55,13 @@ const TaskBoard = props => {
   const renderBoard = () => {
     let xhtml = null;
     xhtml = (
-      <Grid container spacing={2} >
-        {
-          STATUSES.map((status, index) => {
-            const taskFilter = listTask.filter(task => task.status === status.status);
-            return <TaskList key={index} tasks={taskFilter} status={status} />;
-          })
-        }
+      <Grid container spacing={2}>
+        {STATUSES.map((status, index) => {
+          const taskFilter = listTask.filter(
+            task => task.status === status.status
+          );
+          return <TaskList key={index} tasks={taskFilter} status={status} />;
+        })}
       </Grid>
     );
     return xhtml;
@@ -73,15 +73,14 @@ const TaskBoard = props => {
   const handleClose = () => {
     setOpen(false);
   };
-  
-  const renderModal = () => 
-    <TaskForm open={open} handleClose={handleClose} />;
+
+  const renderModal = () => <TaskForm open={open} handleClose={handleClose} />;
 
   return (
-    <div className={classes.taskBoard} >
-      <Button 
-        variant='contained' 
-        color='primary' 
+    <div className={classes.taskBoard}>
+      <Button
+        variant="contained"
+        color="primary"
         className={classes.button}
         onClick={handleClickOpen}
       >

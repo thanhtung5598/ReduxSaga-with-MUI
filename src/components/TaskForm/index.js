@@ -13,7 +13,11 @@ import styles from './styles';
 const TaskForm = props => {
   const { open, handleClose } = props;
   return (
-    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="form-dialog-title"
+    >
       <DialogTitle id="form-dialog-title">Add new work</DialogTitle>
       <DialogContent>
         <form autoComplete="off">
@@ -21,17 +25,22 @@ const TaskForm = props => {
             <TextField id="standard-basic" label="Title" />
           </FormControl>
           <FormControl fullWidth>
-            <TextField id="standard-basic" rows={4} multiline label="Description" />
+            <TextField
+              id="standard-basic"
+              rows={4}
+              multiline
+              label="Description"
+            />
           </FormControl>
         </form>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">
           Cancel
-          </Button>
+        </Button>
         <Button onClick={handleClose} color="primary">
           OK
-          </Button>
+        </Button>
       </DialogActions>
     </Dialog>
   );
