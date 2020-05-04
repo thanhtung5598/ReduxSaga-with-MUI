@@ -1,3 +1,5 @@
+export const API_ENTPOINT = 'http://localhost:7000';
+
 export const STATUSES = [
   {
     status: 0,

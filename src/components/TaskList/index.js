@@ -24,7 +24,7 @@ const TaskList = props => {
 export default withStyles(styles)(TaskList);
 
 TaskList.propTypes = {
-  tasks: PropTypes.object,
+  tasks: PropTypes.array,
   status: PropTypes.object,
   classes: PropTypes.object
 };
