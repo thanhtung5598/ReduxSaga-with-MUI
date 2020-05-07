@@ -5,7 +5,7 @@ const initialState = {
   listTasks: []
 };
 
-const Tasks = (state = initialState, action) => {
+const TasksReducer = (state = initialState, action) => {
   switch (action.type) {
     case TASK_TYPE.FETCH_TASK_REQUEST: {
       return {
@@ -31,4 +31,4 @@ const Tasks = (state = initialState, action) => {
   }
 };
 
-export default Tasks;
+export default TasksReducer;

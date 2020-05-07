@@ -5,6 +5,7 @@ import { withStyles, ThemeProvider } from '@material-ui/core';
 import { Provider } from 'react-redux';
 import configStore from './../../redux/store/configStore';
 import { ToastContainer } from 'react-toastify';
+import GlobalLoading from './../../components/GlobalLoading';
 
 import 'react-toastify/dist/ReactToastify.css';
 import styles from './styles';
@@ -16,6 +17,7 @@ const App = () => {
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <ToastContainer />
+        <GlobalLoading />
         <TaskBoard />
       </ThemeProvider>
     </Provider>

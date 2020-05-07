@@ -10,6 +10,7 @@ import TaskForm from './../../components/TaskForm';
 import { connect } from 'react-redux';
 import * as taskActions from './../../actions/task';
 import { bindActionCreators } from 'redux';
+import SearchBox from './../../components/SearchBox';
 
 import { STATUSES } from './../../constants';
 
@@ -33,8 +34,8 @@ const TaskBoard = props => {
   };
 
   useEffect(() => {
-    const { fetchListTask } = props.taskActionsCreators;
-    fetchListTask();
+    const { fetchListTaskRequrest } = props.taskActionsCreators;
+    fetchListTaskRequrest();
   }, [props.taskActionsCreators]);
 
   const handleClickOpen = () => {
@@ -47,6 +48,14 @@ const TaskBoard = props => {
 
   const renderModal = () => <TaskForm open={open} handleClose={handleClose} />;
 
+  const onHandleChange = e => {
+    console.log(e);
+  };
+
+  const renderSearchBox = () => {
+    return <SearchBox handleChange={onHandleChange} />;
+  };
+
   return (
     <div className={classes.taskBoard}>
       <Button
@@ -57,6 +66,7 @@ const TaskBoard = props => {
       >
         <AddIcon /> Add new task
       </Button>
+      {renderSearchBox()}
       {renderBoard()}
       {renderModal()}
     </div>
@@ -81,7 +91,7 @@ export default withStyles(styles)(
 TaskBoard.propTypes = {
   classes: PropTypes.object,
   taskActionsCreators: PropTypes.shape({
-    fetchListTask: PropTypes.func
+    fetchListTaskRequrest: PropTypes.func
   }),
   listTask: PropTypes.array
 };
