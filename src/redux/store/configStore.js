@@ -1,6 +1,12 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import rootReducers from './../reducer';
+import createSagaMiddleware from 'redux-saga';
+
+import rootReducers from './../reducer'; // rootReducers
+import rootSagas from './../../sagas'; // rootSaga is a generator function
+
+// create the saga middleware
+const sagaMiddleware = createSagaMiddleware();
 
 const composeEnhance =
   process.env.NODE_ENV !== 'production' &&
@@ -10,9 +16,10 @@ const composeEnhance =
     : compose;
 
 const configStore = () => {
-  const middlewares = [thunk]; // List middleware
+  const middlewares = [thunk, sagaMiddleware]; // List middleware
   const enhancers = [applyMiddleware(...middlewares)];
   const store = createStore(rootReducers, composeEnhance(...enhancers));
+  sagaMiddleware.run(rootSagas); // A Subprogram start to tracking the actions
   return store;
 };
 
