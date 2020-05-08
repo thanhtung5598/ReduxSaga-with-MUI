@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import configStore from './../../redux/store/configStore';
 import { ToastContainer } from 'react-toastify';
 import GlobalLoading from './../../components/GlobalLoading';
+import Modal from './../../components/Modal';
 
 import 'react-toastify/dist/ReactToastify.css';
 import styles from './styles';
@@ -18,6 +19,7 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <ToastContainer />
         <GlobalLoading />
+        <Modal />
         <TaskBoard />
       </ThemeProvider>
     </Provider>

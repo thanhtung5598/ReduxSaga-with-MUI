@@ -1,6 +1,7 @@
 How to use the app
     First step: npm i
     Second step: npm start
+    Third step: json-server --watch db.json --port 7000
 
 devDependencies: 
     Husky: force dev can't commit into git if the app exist any problem with ESLint .

@@ -6,7 +6,8 @@ const createRequestTypes = (base, act) =>
   }, {});
 
 const TASK_TYPE = {
-  ...createRequestTypes('TASK', 'FETCH_TASK')
+  ...createRequestTypes('TASK', 'FETCH_TASK'),
+  ...createRequestTypes('TASK', 'FILTER_TASK')
 };
 
 export default TASK_TYPE;

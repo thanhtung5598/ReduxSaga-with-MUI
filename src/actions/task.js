@@ -20,6 +20,24 @@ export const fetchListTaskFailed = error => {
   };
 };
 
+export const filterTask = keyword => {
+  return {
+    type: TASK_TYPE.FILTER_TASK_REQUEST,
+    payload: {
+      keyword
+    }
+  };
+};
+
+export const filterTaskSuccess = data => {
+  return {
+    type: TASK_TYPE.FILTER_TASK_SUCCESS,
+    payload: {
+      data
+    }
+  };
+};
+
 // export const fetchListTask = () => dispatch => {
 //   dispatch(fetchListTaskRequrest());
 //   taskApis
