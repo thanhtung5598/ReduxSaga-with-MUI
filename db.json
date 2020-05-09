@@ -23,18 +23,6 @@
       "title": "read book",
       "description": "read react hook document",
       "status": 0
-    },
-    {
-      "id": 5,
-      "title": "read book",
-      "description": "read eloquent JS book",
-      "status": 1
-    },
-    {
-      "id": 6,
-      "title": "read book",
-      "description": "read Redux document",
-      "status": 2
     }
   ]
 }

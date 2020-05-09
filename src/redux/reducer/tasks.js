@@ -2,11 +2,12 @@ import TASK_TYPE from './../../constants/task';
 import { toastError } from './../../commons/toastHelper';
 
 const initialState = {
-  listTasks: []
+  listTasks: [],
+  error: null
 };
 
-const TasksReducer = (state = initialState, action) => {
-  switch (action.type) {
+const TasksReducer = (state = initialState, actions) => {
+  switch (actions.type) {
     case TASK_TYPE.FETCH_TASK_REQUEST: {
       return {
         ...state,
@@ -16,22 +17,40 @@ const TasksReducer = (state = initialState, action) => {
     case TASK_TYPE.FETCH_TASK_SUCCESS: {
       return {
         ...state,
-        listTasks: action.payload
+        listTasks: actions.payload
       };
     }
     case TASK_TYPE.FETCH_TASK_FAILURE: {
-      toastError(action.payload);
+      toastError(actions.payload);
       return {
         ...state,
-        listTasks: []
+        error: actions.payload
       };
     }
     case TASK_TYPE.FILTER_TASK_SUCCESS: {
-      const { data } = action.payload;
-      console.log(data);
+      const { data } = actions.payload;
       return {
         ...state,
         listTasks: data
+      };
+    }
+    case TASK_TYPE.ADD_TASK_REQUEST: {
+      return {
+        ...state
+      };
+    }
+    case TASK_TYPE.ADD_TASK_SUCCESS: {
+      const { data } = actions.payload;
+      return {
+        ...state,
+        listTasks: [data].concat(state.listTasks)
+      };
+    }
+    case TASK_TYPE.ADD_TASK_FAILURE: {
+      toastError(actions.payload);
+      return {
+        ...state,
+        error: actions.payload
       };
     }
     default:

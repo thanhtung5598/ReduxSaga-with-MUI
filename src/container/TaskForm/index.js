@@ -1,42 +1,61 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import { Box, withStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import { withStyles, Box } from '@material-ui/core';
-import { compose } from 'redux';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators, compose } from 'redux';
+import { Field, reduxForm } from 'redux-form';
 import * as modalActions from './../../actions/modal';
-import { bindActionCreators } from 'redux';
+import * as taskActions from './../../actions/task';
+import renderTextField from './../../components/FormFeild/TextFeild';
 import styles from './styles';
+import validate from './validate';
 
 const TaskForm = props => {
-  const { classes, modalActions } = props;
+  const { classes, modalActions, invalid } = props;
   const { hideModal } = modalActions;
+  const { handleSubmit } = props;
+
+  const handleSubmitForm = data => {
+    const { addTaskRequrest } = props.taskActions;
+    const { title, description } = data;
+    addTaskRequrest({ title, description });
+  };
+
   return (
-    <form autoComplete="off">
+    <form onSubmit={handleSubmit(handleSubmitForm)} autoComplete="off">
       <Grid item md={12}>
-        <TextField
-          className={classes.textField}
+        <Field
+          name="title"
           id="standard-basic"
-          label="Title"
           placeholder="Title"
+          label="Title"
+          className={classes.textField}
+          component={renderTextField}
         />
       </Grid>
       <Grid item md={12}>
-        <TextField
-          className={classes.textField}
+        <Field
+          name="description"
           id="standard-basic"
           rows={4}
           multiline
           placeholder="description"
           label="Description"
+          className={classes.textField}
+          component={renderTextField}
         />
       </Grid>
       <Grid item md={12}>
         <Box display="flex" mt={2} justifyContent="flex-end">
           <Box mr={1}>
-            <Button variant="contained" color="primary">
+            <Button
+              variant="contained"
+              disabled={invalid}
+              type="submit"
+              color="primary"
+            >
               Lưu Lại
             </Button>
           </Box>
@@ -54,16 +73,33 @@ const mapStateToProps = () => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    modalActions: bindActionCreators(modalActions, dispatch)
+    modalActions: bindActionCreators(modalActions, dispatch),
+    taskActions: bindActionCreators(taskActions, dispatch)
   };
 };
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(withStyles(styles), withConnect)(TaskForm);
+const form_Name = 'Task_Management';
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const withReduxForm = reduxForm({
+  form: form_Name,
+  validate
+});
+
+export default compose(
+  withReduxForm,
+  withStyles(styles),
+  withConnect
+)(TaskForm);
 
 TaskForm.propTypes = {
   classes: PropTypes.object,
   modalActions: PropTypes.shape({
     hideModal: PropTypes.func
-  })
+  }),
+  taskActions: PropTypes.shape({
+    addTaskRequrest: PropTypes.func
+  }),
+  invalid: PropTypes.bool,
+  handleSubmit: PropTypes.func
 };

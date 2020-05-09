@@ -16,7 +16,7 @@ const ModalClass = props => {
       <Grid container className={classes.paper}>
         <div className={classes.header}>
           <span className={classes.title}>{title}</span>
-          <CloseIcon className={classes.icon} />
+          <CloseIcon onClick={hideModal} className={classes.icon} />
         </div>
         <div className={classes.content}>{component}</div>
       </Grid>
