@@ -5,7 +5,7 @@ import {
   put,
   delay,
   takeLatest,
-  select,
+  // select,
   takeEvery
 } from 'redux-saga/effects';
 import TASK_TYPE from './../constants/task';
@@ -14,11 +14,12 @@ import { STATUS_CODE, addTask } from './../apis/task';
 import {
   fetchListTaskSuccessed,
   fetchListTaskFailed,
-  filterTaskSuccess,
+  // filterTaskSuccess,
   addTaskFailed,
   addTaskSuccessed
 } from './../actions/task';
 import { showLoading, hideLoading } from './../actions/ui';
+import { fetchListTaskRequrest } from './../actions/task';
 import { hideModal } from '../actions/modal';
 
 /**
@@ -31,9 +32,10 @@ import { hideModal } from '../actions/modal';
 
 function* watchFetchListTaskActions() {
   while (true) {
-    yield take(TASK_TYPE.FETCH_TASK_REQUEST); // chỉ theo dỏi 1 lần
+    const action = yield take(TASK_TYPE.FETCH_TASK_REQUEST); // chỉ theo dỏi 1 lần
+    const { params } = action.payload;
+    const resp = yield call(taskApis.getList, params);
     yield put(showLoading());
-    const resp = yield call(taskApis.getList);
     const { data, status } = resp;
     if (status === STATUS_CODE.SUCCESS) {
       yield put(fetchListTaskSuccessed(data));
@@ -48,11 +50,12 @@ function* watchFetchListTaskActions() {
 function* filterTaskSaga({ payload }) {
   yield delay(500);
   const { keyword } = payload;
-  const list = yield select(state => state.tasks.listTasks);
-  const filterTask = list.filter(task =>
-    task.title.trim().toLowerCase().includes(keyword.trim().toLowerCase())
-  );
-  yield put(filterTaskSuccess(filterTask));
+  yield put(fetchListTaskRequrest({ q: keyword }));
+  // const list = yield select(state => state.tasks.listTasks); filter task trên redux store
+  // const filterTask = list.filter(task =>
+  //   task.title.trim().toLowerCase().includes(keyword.trim().toLowerCase())
+  // );
+  // yield put(filterTaskSuccess(filterTask));
 }
 
 function* addTaskSaga({ payload }) {

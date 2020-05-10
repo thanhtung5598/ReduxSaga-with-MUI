@@ -13,7 +13,7 @@ import styles from './styles';
 import validate from './validate';
 
 const TaskForm = props => {
-  const { classes, modalActions, invalid } = props;
+  const { classes, modalActions, invalid, taskEditting } = props;
   const { hideModal } = modalActions;
   const { handleSubmit } = props;
 
@@ -22,7 +22,7 @@ const TaskForm = props => {
     const { title, description } = data;
     addTaskRequrest({ title, description });
   };
-
+  console.log(taskEditting);
   return (
     <form onSubmit={handleSubmit(handleSubmitForm)} autoComplete="off">
       <Grid item md={12}>
@@ -68,8 +68,10 @@ const TaskForm = props => {
   );
 };
 
-const mapStateToProps = () => {
-  return {};
+const mapStateToProps = state => {
+  return {
+    initialValues: state.tasks.taskEditting
+  };
 };
 const mapDispatchToProps = dispatch => {
   return {
@@ -78,18 +80,18 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const form_Name = 'Task_Management';
+const FORM_NAME = 'TASK_MANAGEMENT';
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 const withReduxForm = reduxForm({
-  form: form_Name,
+  form: FORM_NAME,
   validate
 });
 
 export default compose(
-  withReduxForm,
   withStyles(styles),
-  withConnect
+  withConnect,
+  withReduxForm
 )(TaskForm);
 
 TaskForm.propTypes = {
@@ -101,5 +103,6 @@ TaskForm.propTypes = {
     addTaskRequrest: PropTypes.func
   }),
   invalid: PropTypes.bool,
-  handleSubmit: PropTypes.func
+  handleSubmit: PropTypes.func,
+  taskEditting: PropTypes.object
 };

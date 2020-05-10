@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core';
 import TaskItem from './../../components/TaskItem';
 
 const TaskList = props => {
-  const { tasks, status, classes } = props;
+  const { tasks, status, classes, onClickEdit } = props;
   return (
     <Grid key={status.value} item md={4} xs={12}>
       <Box mt={1} mb={1}>
@@ -15,7 +15,14 @@ const TaskList = props => {
       </Box>
       <div className={classes.wrapperListTask}>
         {tasks.map(task => {
-          return <TaskItem key={task.id} task={task} status={status} />;
+          return (
+            <TaskItem
+              key={task.id}
+              task={task}
+              status={status}
+              onClickEdit={() => onClickEdit(task)}
+            />
+          );
         })}
       </div>
     </Grid>
@@ -26,5 +33,6 @@ export default withStyles(styles)(TaskList);
 TaskList.propTypes = {
   tasks: PropTypes.array,
   status: PropTypes.object,
-  classes: PropTypes.object
+  classes: PropTypes.object,
+  onClickEdit: PropTypes.func
 };

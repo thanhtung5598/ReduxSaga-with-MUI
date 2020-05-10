@@ -3,6 +3,7 @@ import { toastError } from './../../commons/toastHelper';
 
 const initialState = {
   listTasks: [],
+  taskEditting: null,
   error: null
 };
 
@@ -44,6 +45,13 @@ const TasksReducer = (state = initialState, actions) => {
       return {
         ...state,
         listTasks: [data].concat(state.listTasks)
+      };
+    }
+    case TASK_TYPE.SET_TASK_EDITTING: {
+      const { task } = actions.payload;
+      return {
+        ...state,
+        taskEditting: task
       };
     }
     case TASK_TYPE.ADD_TASK_FAILURE: {

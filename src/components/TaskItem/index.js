@@ -13,7 +13,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import styles from './styles';
 
 const TaskItem = props => {
-  const { task, status, classes } = props;
+  const { task, status, classes, onClickEdit } = props;
   const { id, title, description } = task;
   return (
     <Box mb={1}>
@@ -34,7 +34,7 @@ const TaskItem = props => {
             <AddIcon />
           </Fab>
           <Fab size="small" color="secondary" aria-label="edit">
-            <EditIcon />
+            <EditIcon onClick={onClickEdit} />
           </Fab>
         </CardActions>
       </Card>
@@ -47,5 +47,6 @@ export default withStyles(styles)(TaskItem);
 TaskItem.propTypes = {
   task: PropTypes.object,
   status: PropTypes.object,
-  classes: PropTypes.object
+  classes: PropTypes.object,
+  onClickEdit: PropTypes.func
 };

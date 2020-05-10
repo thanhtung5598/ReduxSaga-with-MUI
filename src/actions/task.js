@@ -1,9 +1,12 @@
 import TASK_TYPE from './../constants/task';
 
 // START_FETCH_TASK
-export const fetchListTaskRequrest = () => {
+export const fetchListTaskRequrest = (params = {}) => {
   return {
-    type: TASK_TYPE.FETCH_TASK_REQUEST
+    type: TASK_TYPE.FETCH_TASK_REQUEST,
+    payload: {
+      params
+    }
   };
 };
 
@@ -47,6 +50,7 @@ export const addTaskFailed = error => {
 };
 // END_ADD_TASK
 
+// Filter_TASK
 export const filterTask = keyword => {
   return {
     type: TASK_TYPE.FILTER_TASK_REQUEST,
@@ -64,7 +68,15 @@ export const filterTaskSuccess = data => {
     }
   };
 };
-
+// End_Filter_TASK
+export const setTaskEditting = task => {
+  return {
+    type: TASK_TYPE.SET_TASK_EDITTING,
+    payload: {
+      task
+    }
+  };
+};
 // export const fetchListTask = () => dispatch => {
 //   dispatch(fetchListTaskRequrest());
 //   taskApis

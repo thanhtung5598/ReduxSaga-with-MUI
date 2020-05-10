@@ -18,6 +18,19 @@ import { STATUSES } from './../../constants';
 const TaskBoard = props => {
   const { classes, listTask } = props;
 
+  const handleEditTask = task => {
+    const { setTaskEditting } = props.taskActionsCreators;
+    setTaskEditting(task);
+    const {
+      showModal,
+      changeModalTitle,
+      changeModalContent
+    } = props.modalActions;
+    showModal();
+    changeModalTitle('Cập nhật công việc');
+    changeModalContent(<TaskForm />);
+  };
+
   const renderBoard = () => {
     let xhtml = null;
     xhtml = (
@@ -26,7 +39,14 @@ const TaskBoard = props => {
           const taskFilter = listTask.filter(
             task => task.status === status.status
           );
-          return <TaskList key={index} tasks={taskFilter} status={status} />;
+          return (
+            <TaskList
+              key={index}
+              tasks={taskFilter}
+              status={status}
+              onClickEdit={handleEditTask}
+            />
+          );
         })}
       </Grid>
     );
@@ -39,6 +59,8 @@ const TaskBoard = props => {
   }, [props.taskActionsCreators]);
 
   const handleClickOpen = () => {
+    const { setTaskEditting } = props.taskActionsCreators;
+    setTaskEditting(null);
     const {
       showModal,
       changeModalTitle,
@@ -95,7 +117,8 @@ TaskBoard.propTypes = {
   classes: PropTypes.object,
   taskActionsCreators: PropTypes.shape({
     fetchListTaskRequrest: PropTypes.func,
-    filterTask: PropTypes.func
+    filterTask: PropTypes.func,
+    setTaskEditting: PropTypes.func
   }),
   modalActions: PropTypes.shape({
     showModal: PropTypes.func,

@@ -1,10 +1,15 @@
 import axiosService from './../services/axiosService';
 import { API_ENTPOINT } from './../constants';
+import qs from 'query-string';
 
 const url = 'tasks';
 
-export const getList = () => {
-  return axiosService.get(`${API_ENTPOINT}/${url}`);
+export const getList = (params = {}) => {
+  let queryParams = '';
+  if (Object.keys(params).length > 0) {
+    queryParams = `?${qs.stringify(params)}`;
+  }
+  return axiosService.get(`${API_ENTPOINT}/${url}${queryParams}`);
 };
 
 export const addTask = body => {
