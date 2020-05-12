@@ -8,6 +8,7 @@ const createRequestTypes = (base, act) =>
 const TASK_TYPE = {
   ...createRequestTypes('TASK', 'FETCH_TASK'),
   ...createRequestTypes('TASK', 'ADD_TASK'),
+  ...createRequestTypes('TASK', 'UPDATE_TASK'),
   ...createRequestTypes('TASK', 'FILTER_TASK'),
   SET_TASK_EDITTING: 'SET_TASK_EDITTING'
 };

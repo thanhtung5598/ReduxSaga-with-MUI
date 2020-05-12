@@ -49,7 +49,30 @@ export const addTaskFailed = error => {
   };
 };
 // END_ADD_TASK
+// Update_TASK
+export const updateTaskRequrest = data => {
+  return {
+    type: TASK_TYPE.UPDATE_TASK_REQUEST,
+    payload: data
+  };
+};
 
+export const updateTaskSuccessed = data => {
+  return {
+    type: TASK_TYPE.UPDATE_TASK_SUCCESS,
+    payload: {
+      data
+    }
+  };
+};
+
+export const updateTaskFailed = error => {
+  return {
+    type: TASK_TYPE.UPDATE_TASK_FAILURE,
+    payload: error
+  };
+};
+// Update task
 // Filter_TASK
 export const filterTask = keyword => {
   return {

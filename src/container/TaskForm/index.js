@@ -1,4 +1,4 @@
-import { Box, withStyles } from '@material-ui/core';
+import { Box, withStyles, MenuItem } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
@@ -9,11 +9,12 @@ import { Field, reduxForm } from 'redux-form';
 import * as modalActions from './../../actions/modal';
 import * as taskActions from './../../actions/task';
 import renderTextField from './../../components/FormFeild/TextFeild';
+import renderSelectField from './../../components/FormFeild/Select';
 import styles from './styles';
 import validate from './validate';
 
 const TaskForm = props => {
-  const { classes, modalActions, invalid, taskEditting } = props;
+  const { classes, modalActions, invalid } = props;
   const { hideModal } = modalActions;
   const { handleSubmit } = props;
 
@@ -22,7 +23,25 @@ const TaskForm = props => {
     const { title, description } = data;
     addTaskRequrest({ title, description });
   };
-  console.log(taskEditting);
+  const renderTaskSelection = () => {
+    let xhtml = null;
+    const { taskEditting } = props;
+    if (taskEditting && taskEditting.id) {
+      xhtml = (
+        <Field
+          classes={classes.select}
+          name="status"
+          component={renderSelectField}
+          label="Trạng thái"
+        >
+          <MenuItem value={0}>Ready</MenuItem>
+          <MenuItem value={1}>In Progress</MenuItem>
+          <MenuItem value={2}>Complete</MenuItem>
+        </Field>
+      );
+    }
+    return xhtml;
+  };
   return (
     <form onSubmit={handleSubmit(handleSubmitForm)} autoComplete="off">
       <Grid item md={12}>
@@ -47,6 +66,7 @@ const TaskForm = props => {
           component={renderTextField}
         />
       </Grid>
+      {renderTaskSelection()}
       <Grid item md={12}>
         <Box display="flex" mt={2} justifyContent="flex-end">
           <Box mr={1}>
@@ -70,6 +90,7 @@ const TaskForm = props => {
 
 const mapStateToProps = state => {
   return {
+    taskEditting: state.tasks.taskEditting,
     initialValues: state.tasks.taskEditting
   };
 };
