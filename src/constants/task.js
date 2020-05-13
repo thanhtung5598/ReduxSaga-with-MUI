@@ -10,6 +10,7 @@ const TASK_TYPE = {
   ...createRequestTypes('TASK', 'ADD_TASK'),
   ...createRequestTypes('TASK', 'UPDATE_TASK'),
   ...createRequestTypes('TASK', 'FILTER_TASK'),
+  ...createRequestTypes('TASK', 'DELETE_TASK'),
   SET_TASK_EDITTING: 'SET_TASK_EDITTING'
 };
 

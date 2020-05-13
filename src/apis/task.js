@@ -12,8 +12,19 @@ export const getList = (params = {}) => {
   return axiosService.get(`${API_ENTPOINT}/${url}${queryParams}`);
 };
 
+// http://localhost:7000/tasks Method: Post
 export const addTask = body => {
   return axiosService.post(`${API_ENTPOINT}/${url}`, body);
+};
+
+// http://localhost:7000/tasks/:id Method: Put
+export const updateTask = (data, taskId) => {
+  return axiosService.put(`${API_ENTPOINT}/${url}/${taskId}`, data);
+};
+
+// http://localhost:7000/tasks/:id Method: Delete
+export const deleteTask = taskId => {
+  return axiosService.delete(`${API_ENTPOINT}/${url}/${taskId}`);
 };
 
 export const STATUS_CODE = {

@@ -1,8 +1,8 @@
-## h2 App Quản Lý Công Việc
+# h2 App Quản Lý Công Việc
 ***
-Before you continue, ensure you meet the following requirements
+Before you continue,make ensure you meet the following requirements
 ***
-** Installation
+Installation
   * B1 : npm i
   * B2 : json-server --watch db.json --port 7000
   * B3: npm start

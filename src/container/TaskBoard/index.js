@@ -4,6 +4,7 @@ import styles from './styles';
 import { withStyles } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import TaskList from './../../components/TaskList';
 import TaskForm from './../TaskForm';
@@ -31,6 +32,44 @@ const TaskBoard = props => {
     changeModalContent(<TaskForm />);
   };
 
+  const showModalDeleteTask = id => {
+    const {
+      hideModal,
+      showModal,
+      changeModalTitle,
+      changeModalContent
+    } = props.modalActions;
+    showModal();
+    changeModalTitle('Xóa công việc');
+    changeModalContent(
+      <div className={classes.modalDelete}>
+        <div className={classes.modalConfirmText}>
+          Bạn có chắc chắn muốn xóa công việc này không
+        </div>
+        <Box display="flex" flexDirection="row-reverse" mt={2}>
+          <Box ml={1}>
+            <Button variant="contained" onClick={hideModal}>
+              Hủy bỏ
+            </Button>
+          </Box>
+          <Box ml={1}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => handleDeleteTask(id)}
+            >
+              Đồng ý
+            </Button>
+          </Box>
+        </Box>
+      </div>
+    );
+  };
+  const handleDeleteTask = id => {
+    const { deleteTaskRequrest } = props.taskActionsCreators;
+    deleteTaskRequrest(id);
+  };
+
   const renderBoard = () => {
     let xhtml = null;
     xhtml = (
@@ -45,6 +84,7 @@ const TaskBoard = props => {
               tasks={taskFilter}
               status={status}
               onClickEdit={handleEditTask}
+              onClickDelete={showModalDeleteTask}
             />
           );
         })}
@@ -118,7 +158,8 @@ TaskBoard.propTypes = {
   taskActionsCreators: PropTypes.shape({
     fetchListTaskRequrest: PropTypes.func,
     filterTask: PropTypes.func,
-    setTaskEditting: PropTypes.func
+    setTaskEditting: PropTypes.func,
+    deleteTaskRequrest: PropTypes.func
   }),
   modalActions: PropTypes.shape({
     showModal: PropTypes.func,

@@ -100,6 +100,33 @@ export const setTaskEditting = task => {
     }
   };
 };
+// Delete_TASK
+export const deleteTaskRequrest = id => {
+  return {
+    type: TASK_TYPE.DELETE_TASK_REQUEST,
+    payload: {
+      id
+    }
+  };
+};
+
+export const deleteTaskSuccessed = data => {
+  return {
+    type: TASK_TYPE.DELETE_TASK_SUCCESS,
+    payload: {
+      data
+    }
+  };
+};
+
+export const deleteTaskFailed = error => {
+  return {
+    type: TASK_TYPE.DELETE_TASK_FAILURE,
+    payload: error
+  };
+};
+// Delete_TASK
+
 // export const fetchListTask = () => dispatch => {
 //   dispatch(fetchListTaskRequrest());
 //   taskApis

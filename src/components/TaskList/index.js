@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core';
 import TaskItem from './../../components/TaskItem';
 
 const TaskList = props => {
-  const { tasks, status, classes, onClickEdit } = props;
+  const { tasks, status, classes, onClickEdit, onClickDelete } = props;
   return (
     <Grid key={status.value} item md={4} xs={12}>
       <Box mt={1} mb={1}>
@@ -21,6 +21,7 @@ const TaskList = props => {
               task={task}
               status={status}
               onClickEdit={() => onClickEdit(task)}
+              onClickDelete={() => onClickDelete(task.id)}
             />
           );
         })}
@@ -34,5 +35,6 @@ TaskList.propTypes = {
   tasks: PropTypes.array,
   status: PropTypes.object,
   classes: PropTypes.object,
-  onClickEdit: PropTypes.func
+  onClickEdit: PropTypes.func,
+  onClickDelete: PropTypes.func
 };

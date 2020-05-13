@@ -18,22 +18,23 @@ const renderFromHelper = ({ touched, error }) => {
 };
 
 const renderSelectField = ({
+  classes,
   input,
   label,
   meta: { touched, error },
   children,
   ...custom
 }) => (
-  <FormControl error={touched && error}>
+  <FormControl className={classes.formControl} error={touched && error}>
     <InputLabel htmlFor="color-native-simple">{label}</InputLabel>
     <Select
-      native
       {...input}
       {...custom}
       inputProps={{
         name: input.name,
         id: 'color-native-simple'
       }}
+      value={input.value}
     >
       {children}
     </Select>
@@ -47,5 +48,6 @@ renderSelectField.propTypes = {
   label: Proptypes.string,
   input: Proptypes.object,
   meta: Proptypes.object,
-  children: Proptypes.array
+  children: Proptypes.array,
+  classes: Proptypes.object
 };

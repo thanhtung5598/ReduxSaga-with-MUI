@@ -19,9 +19,14 @@ const TaskForm = props => {
   const { handleSubmit } = props;
 
   const handleSubmitForm = data => {
-    const { addTaskRequrest } = props.taskActions;
-    const { title, description } = data;
-    addTaskRequrest({ title, description });
+    const { taskEditting } = props;
+    const { addTaskRequrest, updateTaskRequrest } = props.taskActions;
+    const { title, description, status } = data;
+    if (taskEditting && taskEditting.id) {
+      updateTaskRequrest({ title, description, status });
+    } else {
+      addTaskRequrest({ title, description });
+    }
   };
   const renderTaskSelection = () => {
     let xhtml = null;
@@ -121,7 +126,8 @@ TaskForm.propTypes = {
     hideModal: PropTypes.func
   }),
   taskActions: PropTypes.shape({
-    addTaskRequrest: PropTypes.func
+    addTaskRequrest: PropTypes.func,
+    updateTaskRequrest: PropTypes.func
   }),
   invalid: PropTypes.bool,
   handleSubmit: PropTypes.func,

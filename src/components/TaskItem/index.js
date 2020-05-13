@@ -8,12 +8,12 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Fab from '@material-ui/core/Fab';
 import Typography from '@material-ui/core/Typography';
-import AddIcon from '@material-ui/icons/Add';
+import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import styles from './styles';
 
 const TaskItem = props => {
-  const { task, status, classes, onClickEdit } = props;
+  const { task, status, classes, onClickEdit, onClickDelete } = props;
   const { id, title, description } = task;
   return (
     <Box mb={1}>
@@ -31,7 +31,7 @@ const TaskItem = props => {
         </CardContent>
         <CardActions className={classes.cardActions}>
           <Fab size="small" color="primary" aria-label="add">
-            <AddIcon />
+            <DeleteIcon onClick={onClickDelete} />
           </Fab>
           <Fab size="small" color="secondary" aria-label="edit">
             <EditIcon onClick={onClickEdit} />
@@ -48,5 +48,6 @@ TaskItem.propTypes = {
   task: PropTypes.object,
   status: PropTypes.object,
   classes: PropTypes.object,
-  onClickEdit: PropTypes.func
+  onClickEdit: PropTypes.func,
+  onClickDelete: PropTypes.func
 };
