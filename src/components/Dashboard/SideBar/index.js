@@ -1,21 +1,12 @@
-import React, { useState } from 'react';
-import {
-  withStyles,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText
-} from '@material-ui/core';
+import React from 'react';
+import { withStyles, Drawer, List, ListItem } from '@material-ui/core';
 import Proptypes from 'prop-types';
 import { ADMIN_ROUTES } from './../../../constants';
 import styles from './styles';
+import { NavLink } from 'react-router-dom';
 
 const SideBar = props => {
-  const { classes } = props;
-  const [state, setState] = useState(true);
-  const toggleDrawer = value => {
-    setState(value);
-  };
+  const { classes, showSidebar } = props;
   const list = ADMIN_ROUTES => {
     let xhtml = null;
     xhtml = (
@@ -23,9 +14,17 @@ const SideBar = props => {
         <List component="nav">
           {ADMIN_ROUTES.map((item, index) => {
             return (
-              <ListItem key={index} className={classes.menuItem} button>
-                <ListItemText primary={item.name} />
-              </ListItem>
+              <NavLink
+                key={index}
+                to={item.path}
+                exact={item.exact}
+                className={classes.menuLink}
+                activeClassName={classes.menuActiveClass}
+              >
+                <ListItem className={classes.menuItem} button>
+                  {item.name}
+                </ListItem>
+              </NavLink>
             );
           })}
         </List>
@@ -35,9 +34,8 @@ const SideBar = props => {
   };
   return (
     <Drawer
-      open={state}
-      onClose={() => toggleDrawer(false)}
-      variant="permanent"
+      variant="persistent"
+      open={showSidebar}
       classes={{
         paper: classes.drawerPaper
       }}
@@ -49,5 +47,6 @@ const SideBar = props => {
 export default withStyles(styles)(SideBar);
 
 SideBar.propTypes = {
-  classes: Proptypes.object
+  classes: Proptypes.object,
+  showSidebar: Proptypes.bool
 };

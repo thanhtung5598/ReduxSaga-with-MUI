@@ -46,7 +46,7 @@ function* watchFetchListTaskActions() {
     } else {
       yield put(fetchListTaskFailed(data));
     }
-    yield delay(200);
+    yield delay(500);
     yield put(hideLoading());
   }
 }

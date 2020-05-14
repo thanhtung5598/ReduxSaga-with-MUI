@@ -7,3 +7,8 @@ export const showLoading = () => ({
 export const hideLoading = () => ({
   type: types.HIDE_LOADING
 });
+
+export const toggleSidebar = value => ({
+  type: types.TOGGLE_SIDEBAR,
+  payload: value
+});

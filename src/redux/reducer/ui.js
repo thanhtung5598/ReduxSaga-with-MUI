@@ -1,7 +1,8 @@
 import * as types from './../../constants/ui';
 
 const initialState = {
-  showLoading: false
+  showLoading: false,
+  showSidebar: true
 };
 
 const uiReducer = (state = initialState, action) => {
@@ -16,6 +17,12 @@ const uiReducer = (state = initialState, action) => {
       return {
         ...state,
         showLoading: false
+      };
+    }
+    case types.TOGGLE_SIDEBAR: {
+      return {
+        ...state,
+        showSidebar: action.payload
       };
     }
     default:

@@ -27,6 +27,11 @@ const Header = props => {
     setAnchorEl(null);
   };
 
+  const handleToggleSidebar = () => {
+    const { onToggleSidebar, showSidebar } = props;
+    onToggleSidebar(!showSidebar);
+  };
+
   const renderMenu = () => {
     return (
       <Menu
@@ -51,6 +56,7 @@ const Header = props => {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
+            onClick={handleToggleSidebar}
           >
             <MenuIcon />
           </IconButton>
@@ -81,5 +87,7 @@ export default withStyles(styles)(Header);
 
 Header.propTypes = {
   classes: Proptypes.object,
-  name: Proptypes.string
+  name: Proptypes.string,
+  showSidebar: Proptypes.bool,
+  onToggleSidebar: Proptypes.func
 };
